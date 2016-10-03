@@ -597,7 +597,7 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Utils:ActualSizePropertyProxy x:Name="ActualSizeProxy" Element="{Binding Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" Visibility="Collapsed" IsHitTestVisible="False"/>
-                        <ContentControl x:Name="OffLabel" 
+                        <ContentControl Grid.Column="0" x:Name="OffLabel" 
                                     Content="{TemplateBinding UncheckedContent}" 
                                     HorizontalContentAlignment="Center" 
                                     VerticalContentAlignment="Center"

@@ -1,48 +1,58 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Threading;
+using Prism.Commands;
 
 namespace Demo
 {
 	public class DemoViewModel : INotifyPropertyChanged
 	{
-		private readonly DispatcherTimer _restartEventTimer = new DispatcherTimer();
+		private readonly DispatcherTimer restartEventTimer = new DispatcherTimer();
 
 		public DemoViewModel()
 		{
-			_restartEventTimer.Interval = TimeSpan.FromSeconds(1.5);
-			_restartEventTimer.Tick += delegate { _restartEventTimer.Stop(); RestartToggleChecked = false; };
+			restartEventTimer.Interval = TimeSpan.FromSeconds(1.5);
+			restartEventTimer.Tick += delegate { restartEventTimer.Stop(); RestartToggleChecked = false; };
+
+            MyCommand = new DelegateCommand<bool?>(ExecuteMethod);
 		}
 
-		private bool _restartToggleChecked;
+	    private void ExecuteMethod(bool? val)
+	    {
+
+	        MessageBox.Show(val.ToString());
+
+	    }
+
+	    private bool restartToggleChecked;
 		public bool RestartToggleChecked
 		{
 			get
 			{
-				return _restartToggleChecked;
+				return restartToggleChecked;
 			}
 			set
 			{
-				if (_restartToggleChecked != value)
+				if (restartToggleChecked != value)
 				{
-					_restartToggleChecked = value;
+					restartToggleChecked = value;
 					InvokePropertyChanged("RestartToggleChecked");
 
-					if (_restartToggleChecked)
+					if (restartToggleChecked)
 					{
-						_restartEventTimer.Start();
+						restartEventTimer.Start();
 					}
 				}
 			}
 		}
 
+        public DelegateCommand<bool?> MyCommand { get; set; }
+
 		public event PropertyChangedEventHandler PropertyChanged;
 		public void InvokePropertyChanged(string propertyName)
 		{
-			if (PropertyChanged != null)
-			{
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+		    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

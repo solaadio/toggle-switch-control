@@ -476,11 +476,13 @@ namespace ToggleSwitch
 			{
 				if ((bool)e.NewValue)
 				{
-					control.InvokeChecked(new RoutedEventArgs());
+				    control.InvokeChecked(new RoutedEventArgs());
+				    if (control.Command != null) control.Command.Execute(e.NewValue);
 				}
 				else
 				{
-					control.InvokeUnchecked(new RoutedEventArgs());
+				    control.InvokeUnchecked(new RoutedEventArgs());
+				    if (control.Command != null) control.Command.Execute(e.NewValue);
 				}
 			}
 
@@ -544,15 +546,38 @@ namespace ToggleSwitch
 			}
 		}
 
-		#endregion
+        #endregion
 
-		/// <summary> 
-		/// Initializes a new instance of the ToggleSwitchBase class.
-		/// </summary>
-		protected ToggleSwitchBase()
+        #region Commands
+
+        #region Command (DependencyProperty)
+
+        public static DependencyProperty CommandProperty  = 
+            DependencyProperty.Register("Command",typeof(ICommand),typeof(ToggleSwitchBase));
+
+        ///<summary>
+        /// Gets or sets the command
+        ///</summary>
+        [Category(CommonPropertiesCategory)]
+        [Description("Gets or sets whether the command.")]
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        #endregion
+
+        #endregion
+
+        /// <summary> 
+        /// Initializes a new instance of the ToggleSwitchBase class.
+        /// </summary>
+        protected ToggleSwitchBase()
 		{
 			Loaded += delegate { UpdateVisualState(false); };
 			IsEnabledChanged += OnIsEnabledChanged;
+            Command = new RoutedCommand();
 		}
 
 		/// <summary>

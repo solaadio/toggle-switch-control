@@ -22,7 +22,8 @@
                 <ToggleSwitch:HorizontalToggleSwitch
                     Style="{StaticResource iPhoneToggleSwitchStyle}" 
                     IsChecked="True" 
-                    Margin="0,5,0,10" 
+                    Margin="0,5,0,10"
+                    UncheckedBackground="Red" CheckedBackground="Green"
                     HorizontalAlignment="Left" />
             </StackPanel>
             <StackPanel Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1">
@@ -59,7 +60,7 @@
                 <TextBlock Text="OS X" HorizontalAlignment="Left" />
                 <ToggleSwitch:HorizontalToggleSwitch 
                     CheckedContent="ON" 
-                    UncheckedContent="OFF"
+                    UncheckedContent="OFF" IsChecked="True"
                     Style="{StaticResource SafariSwitchStyle}" Margin="0,5,0,10" HorizontalAlignment="Left" />
             </StackPanel>
             <StackPanel Grid.Row="2" HorizontalAlignment="Left">
@@ -94,7 +95,7 @@
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="2" HorizontalAlignment="Left">
                 <TextBlock Text="Brushed metal" HorizontalAlignment="Left" Margin="0,15,0,5" />
-                <ToggleSwitch:HorizontalToggleSwitch 
+                <ToggleSwitch:HorizontalToggleSwitch IsChecked="True"
                     Style="{StaticResource LightBulbToggleSwitchStyle}" HorizontalAlignment="Left">
                     <ToggleSwitch:HorizontalToggleSwitch.UncheckedContent>
                         <Image Source="../Images/lightOff.png" Height="32" Margin="0,-8,0,0" />
